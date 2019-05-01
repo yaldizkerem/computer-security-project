@@ -1,6 +1,6 @@
 pipeline {
     environment {
-	def app
+	app = null
     }
     agent none
     stages {
