@@ -1,0 +1,41 @@
+pipeline {
+    agent none 
+    stages {
+        stage('Test') { 
+            agent {
+	        docker {
+	            image 'maven:3-jdk-8-alpine' 
+	        }
+            }
+            steps {
+	        sh 'mvn test' 
+	    }
+        }
+        stage('Package') {
+            agent {
+	        docker {
+	            image 'maven:3-jdk-8-alpine'
+	        }
+            }
+            steps {
+	        sh 'mvn package -Dmaven.test.skip=true'
+	    }
+            post {
+                success {
+                    archiveArtifacts 'target/*.jar'
+                }
+            }
+        }
+        stage("Static Code Analysis") {
+            agent any
+            environment {
+                scannerHome = tool 'SonarQube Scanner'
+            }
+            steps {
+                withSonarQubeEnv('sonarqube.keremyaldiz.com') {
+                    sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=computer-security -Dsonar.sources=. -Dsonar.java.binaries=target -Dsonar.projectName=computer-security -Dsonar.projectVersion=0.1.0'
+                }
+            }
+        }
+    }
+}
