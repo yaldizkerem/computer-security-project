@@ -8,8 +8,13 @@ pipeline {
 	        }
             }
             steps {
-	        sh 'mvn test' 
+	        sh 'mvn surefire-report:report'
 	    }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
         }
         stage('Package') {
             agent {
@@ -33,7 +38,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('sonarqube.keremyaldiz.com') {
-                    sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=computer-security -Dsonar.sources=. -Dsonar.java.binaries=target -Dsonar.projectName=computer-security -Dsonar.projectVersion=0.1.0'
+                    sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=computer-security -Dsonar.sources=. -Dsonar.java.binaries=target -Dsonar.projectName=computer-security -Dsonar.projectVersion=${BUILD_NUMBER}'
                 }
             }
         }
