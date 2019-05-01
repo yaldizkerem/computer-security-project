@@ -1,4 +1,7 @@
 pipeline {
+    environment {
+	def app
+    }
     agent none
     stages {
         stage('Test') { 
@@ -45,7 +48,7 @@ pipeline {
 	stage('Build Docker Image') {
 	    steps {
 		script {
-		    docker.build 'computer-security'
+		    app = docker.build 'computer-security'
 		}
 	    }
 	}
