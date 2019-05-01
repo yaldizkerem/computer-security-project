@@ -1,5 +1,5 @@
 pipeline {
-    agent none 
+    agent none
     stages {
         stage('Test') { 
             agent {
@@ -42,5 +42,12 @@ pipeline {
                 }
             }
         }
+	stage('Build Docker Image') {
+	    steps {
+		script {
+		    docker.build 'computer-security'
+		}
+	    }
+	}
     }
 }
