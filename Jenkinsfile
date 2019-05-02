@@ -49,7 +49,7 @@ pipeline {
 	stage('Build Docker Image') {
 	    steps {
 		script {
-		    app = docker.build 'computer-security'
+		    app = docker.build(registery + '/computer-security')
 		}
 	    }
 	}
@@ -57,8 +57,8 @@ pipeline {
 	    steps {
 		script {
 		    docker.withRegistry(registery) {
-			app.push '${env.BUILD_NUMBER}'
-			app.push 'latest'
+			app.push('${env.BUILD_NUMBER}')
+			app.push('latest')
 		    }
 		}
 	    }
