@@ -66,11 +66,13 @@ pipeline {
         stage('Deployment') {
             agent any
             steps {
-		try {
-		    sh 'docker rm -f computer-security || true'
-		}
-		finally {
-                    sh 'docker run -d --name=computer-security -p 8000:8080 https://keremyaldiz.com:5000/computer-security'
+		script {
+		    try {
+			sh 'docker rm -f computer-security || true'
+		    }
+		    finally {
+			sh 'docker run -d --name=computer-security -p 8000:8080 https://keremyaldiz.com:5000/computer-security'
+		    }
 		}
 	    }
         }
