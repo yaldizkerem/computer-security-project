@@ -1,8 +1,8 @@
 pipeline {
+    agent none
     environment {
 	app = null
     }
-    agent none
     stages {
         stage('Test') { 
             agent {
@@ -49,6 +49,16 @@ pipeline {
 	    steps {
 		script {
 		    app = docker.build 'computer-security'
+		}
+	    }
+	}
+	stage('Push Docker Image') {
+	    steps {
+		script {
+		    docker.withRegistry('https://keremyaldiz.com:5000') {
+			app.push('${env.BUILD_NUMBER}')
+			app.push('latest')
+		    }
 		}
 	    }
 	}
