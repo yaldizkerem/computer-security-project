@@ -63,5 +63,11 @@ pipeline {
 		}
 	    }
 	}
+        stage('Deployment') {
+            agent any
+            steps {
+	        sh 'docker rm -f computer-security; docker run -d --name=computer-security -p 8000:8080 computer-security'
+	    }
+        }
     }
 }
