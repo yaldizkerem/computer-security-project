@@ -2,7 +2,7 @@ pipeline {
     agent none
     environment {
 	app = null
-	registery = 'https://keremyaldiz.com'
+	registery = 'https://keremyaldiz.com:5000'
     }
     stages {
         stage('Test') { 
