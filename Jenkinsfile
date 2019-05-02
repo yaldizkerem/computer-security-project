@@ -69,5 +69,17 @@ pipeline {
 	        sh 'docker rm -f computer-security || true; docker run -d --name=computer-security -p 8000:8080 computer-security'
 	    }
         }
+        stage('Dynamic Code Analysis') {
+            agent any
+            steps {
+	        sh 'docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000 > target/report.txt'
+	    }
+	    post {
+                always {
+                    archiveArtifacts 'target/report.txt'
+                }
+            }
+
+        }
     }
 }
