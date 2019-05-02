@@ -12,7 +12,7 @@ public class HelloController {
     }
 
     @RequestMapping("/computer-security")
-    public String index() {
+    public String computerSecurity() {
         return "Greetings from Spring Boot!";
     }
     
