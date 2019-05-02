@@ -68,7 +68,7 @@ pipeline {
             steps {
 		script {
 		    try {
-			sh 'docker rm -f computer-security || true'
+			sh 'docker rm -f computer-security'
 		    }
 		    finally {
 			sh 'docker run -d --name=computer-security -p 8000:8080 keremyaldiz.com:5000/computer-security'
