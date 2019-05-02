@@ -49,7 +49,7 @@ pipeline {
 	stage('Build Docker Image') {
 	    steps {
 		script {
-		    app = docker.build registery + '/computer-security'
+		    app = docker.build 'computer-security'
 		}
 	    }
 	}
