@@ -67,7 +67,7 @@ pipeline {
             agent any
             steps {
 	        sh 'docker rm -f computer-security || true'
-		sh 'docker run -d --name=computer-security -p 8000:8080 ' + registery + '/computer-security'
+		sh 'docker run -d --name=computer-security -p 8000:8080 https://keremyaldiz.com:5000/computer-security:latest'
 	    }
         }
         stage('Dynamic Code Analysis') {
