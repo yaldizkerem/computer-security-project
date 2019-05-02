@@ -12,7 +12,7 @@ pipeline {
 	        }
             }
             steps {
-	        sh 'mvn surefire-report:report'
+	        sh 'mvn clean surefire-report:report'
 	    }
             post {
                 always {
