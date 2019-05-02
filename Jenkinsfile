@@ -57,7 +57,7 @@ pipeline {
 	    steps {
 		script {
 		    docker.withRegistry(registery) {
-			app.push '${env.BUILD_NUMBER}'
+			app.push '${BUILD_NUMBER}'
 			app.push 'latest'
 		    }
 		}
