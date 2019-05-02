@@ -38,4 +38,11 @@ public class HelloControllerIT {
                 String.class);
         assertThat(response.getBody(), equalTo("<a href=\"/computer-security\">Greetings from Spring Boot!</a>"));
     }
+
+    @Test
+    public void getComputerSecurity() throws Exception {
+        ResponseEntity<String> response = template.getForEntity(base.toString() + "computer-security",
+                String.class);
+        assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
+    }
 }
