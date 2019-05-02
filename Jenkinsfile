@@ -72,10 +72,10 @@ pipeline {
         stage('Dynamic Code Analysis') {
             agent any
 	    options {
-      	    	timeout(time: 1, unit: 'HOURS') 
+      	    	timeout(time: 2, unit: 'MINUTES') 
             }
             steps {
-	        sh 'docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000 > target/report.txt'
+	        sh 'docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000'
 	    }
 	    post {
                 always {
