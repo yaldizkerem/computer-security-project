@@ -2,6 +2,7 @@ pipeline {
     agent none
     environment {
 	app = null
+	registery = 'https://keremyaldiz.com'
     }
     stages {
         stage('Test') { 
@@ -48,14 +49,14 @@ pipeline {
 	stage('Build Docker Image') {
 	    steps {
 		script {
-		    app = docker.build 'computer-security'
+		    app = docker.build registery + '/computer-security'
 		}
 	    }
 	}
 	stage('Push Docker Image') {
 	    steps {
 		script {
-		    docker.withRegistry('https://keremyaldiz.com:5000') {
+		    docker.withRegistry(registery) {
 			app.push '${env.BUILD_NUMBER}'
 			app.push 'latest'
 		    }
