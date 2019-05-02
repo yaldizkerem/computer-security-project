@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment {
 	app = null
 	registery = 'https://keremyaldiz.com:5000'
