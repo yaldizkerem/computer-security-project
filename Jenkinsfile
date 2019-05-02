@@ -95,7 +95,7 @@ pipeline {
 		      body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
                       <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
 		      )
-	    sh 'curl -H "Content-Type: application/json" -X POST --data \'{"issue":{"project_id": 2,"subject":' + '"${env.JOB_NAME} [${env.BUILD_NUMBER}]"' + '}}\' -H "X-Redmine-API-Key: 691aea146ccfbdd24420aa7a1e981c1a864886fa" https://management.keremyaldiz.com/issues.json'
+	    sh 'curl -H "Content-Type: application/json" -X POST --data \'{"issue":{"project_id": 2,"subject":' + "\"${env.JOB_NAME} [${env.BUILD_NUMBER}]\"" + '}}\' -H "X-Redmine-API-Key: 691aea146ccfbdd24420aa7a1e981c1a864886fa" https://management.keremyaldiz.com/issues.json'
 	}
     }
 }
