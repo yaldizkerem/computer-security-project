@@ -75,7 +75,7 @@ pipeline {
       	    	timeout(time: 2, unit: 'MINUTES') 
             }
             steps {
-	        sh 'docker run --rm -u root -v /var/lib/docker/volumes/jenkins/_data/$(pwd | sed 's-/var/jenkins_home--'):/zap/wrk/ -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000 -r dynamic.html || true ; ls; pwd'
+	        sh 'docker run --rm -u root -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000 -r dynamic.html || true ; ls; pwd'
 	    }
             post {
                 success {
