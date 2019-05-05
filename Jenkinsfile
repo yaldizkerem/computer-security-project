@@ -75,8 +75,13 @@ pipeline {
       	    	timeout(time: 2, unit: 'MINUTES') 
             }
             steps {
-	        sh 'docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000 || true'
+	        sh 'docker run --rm -u root -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000 -r cynamic.html || true'
 	    }
+            post {
+                success {
+                    archiveArtifacts 'dynamic.html'
+                }
+            }
         }
     }
     post {
