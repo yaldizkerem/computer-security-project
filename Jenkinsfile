@@ -75,8 +75,8 @@ pipeline {
       	    	timeout(time: 2, unit: 'MINUTES') 
             }
             steps {
-	        sh 'docker run --rm -u root -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000 -r dynamic.html'
-		sh 'ls'
+	        sh 'docker run --rm -u root -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://keremyaldiz.com:8000 -r dynamic.html'
+		sh 'pwd; ls'
 	    }
             post {
                 success {
