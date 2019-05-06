@@ -32,6 +32,7 @@ pipeline {
             post {
                 success {
                     stash(name: "jar", includes: 'target/*.jar')
+		    archiveArtifacts 'target/*.jar'
                 }
             }
         }
