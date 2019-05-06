@@ -84,6 +84,9 @@ pipeline {
                     archiveArtifacts 'dynamic.html'
                 }
             }
+	    cleanup {
+	        deleteDir()
+            }
         }
     }
     post {
