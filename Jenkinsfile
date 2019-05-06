@@ -102,8 +102,8 @@ pipeline {
 		      )
 	    sh 'curl -H "Content-Type: application/json" -X POST --data \'{"issue":{"project_id": 2,"subject":' + "\"${env.JOB_NAME} [${env.BUILD_NUMBER}]\"" + '}}\' -H "X-Redmine-API-Key: 691aea146ccfbdd24420aa7a1e981c1a864886fa" https://management.keremyaldiz.com/issues.json'
 	}
-	always {
-	    cleanWs()
+	cleanup {
+	    deleteDir()
         }
     }
 }
