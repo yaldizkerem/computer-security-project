@@ -83,9 +83,9 @@ pipeline {
                 success {
                     archiveArtifacts 'dynamic.html'
                 }
-            }
-	    cleanup {
-	        deleteDir()
+		cleanup {
+		    deleteDir()
+                }
             }
         }
     }
