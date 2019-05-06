@@ -41,6 +41,7 @@ pipeline {
                 scannerHome = tool 'SonarQube Scanner'
             }
             steps {
+	        copyArtifacts filter: 'target/*.jar', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
                 withSonarQubeEnv('sonarqube.keremyaldiz.com') {
                     sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=computer-security -Dsonar.sources=. -Dsonar.java.binaries=target -Dsonar.projectName=computer-security -Dsonar.projectVersion=${BUILD_NUMBER}'
                 }
@@ -92,7 +93,6 @@ pipeline {
 		      body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
                       <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
 		      )
-            deleteDir()
 	}
 	failure {
 	    emailext (
@@ -102,7 +102,9 @@ pipeline {
                       <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
 		      )
 	    sh 'curl -H "Content-Type: application/json" -X POST --data \'{"issue":{"project_id": 2,"subject":' + "\"${env.JOB_NAME} [${env.BUILD_NUMBER}]\"" + '}}\' -H "X-Redmine-API-Key: 691aea146ccfbdd24420aa7a1e981c1a864886fa" https://management.keremyaldiz.com/issues.json'
-	    deleteDir()
 	}
+	always {
+	    deleteDir()
+        }
     }
 }
