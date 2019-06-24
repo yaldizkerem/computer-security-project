@@ -29,4 +29,4 @@ steps:
     receipents: [ contact@keremyaldiz.com ]
     subject: Dummy
     body: Dummy
-    attachment: target/surefire-reports/*.xml
+    attachment: target/surefire-reports/\*.xml
