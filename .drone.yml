@@ -12,6 +12,11 @@ steps:
   commands:
   - mvn package -Dmaven.test.skip=true
 
+- name: ls
+  image: bash
+  commands:
+  - ls -R
+
 - name: notify
   image: drillster/drone-email
   settings:
