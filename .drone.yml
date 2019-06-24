@@ -11,3 +11,16 @@ steps:
   image: maven:3-jdk-10
   commands:
   - mvn package -Dmaven.test.skip=true
+
+- name: notify
+  image: drillster/drone-email
+  settings:
+    host: mail.keremyaldiz.com
+    username:
+      from_secret: username
+    password:
+      from_secret: password
+    from: admin@keremyaldiz.com
+    receipents: [ contact@keremyaldiz.com ]
+    subject: Dummy
+    body: Dummy
