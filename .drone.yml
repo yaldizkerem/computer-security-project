@@ -26,7 +26,6 @@ steps:
     password:
       from_secret: password
     from: admin@keremyaldiz.com
-    receipents: [ contact@keremyaldiz.com ]
+#    receipents: [ contact@keremyaldiz.com ]
     subject: Dummy
     body: Dummy
-    attachment: target/surefire-reports/**.xml
